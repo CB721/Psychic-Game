@@ -11,6 +11,7 @@ var alphaPick = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"
 var wins = 0;
 var losses = 0;
 var guesses;
+var pressedKeys;
 
 //Computer picks random letter
 
@@ -22,28 +23,37 @@ function updateScore() {
     document.getElementById('wins').innerHTML = "Wins: " + wins;
     document.getElementById('losses').innerHTML = "Losses: " + losses;
     document.getElementById('guesses').innerHTML = "Guesses Left: " + guesses;
-    document.getElementById('pressedkeys')
 }
 
 function reset() {
-    computerPick = alphaPick[Math.floor(Math.random() * alphaPick.length)]; 
+    computerPick = alphaPick[Math.floor(Math.random() * alphaPick.length)];
     guesses = 0;
 }
 
+
+
 document.onkeypress = function (event) {
     var userGuess = event.key;
-    //show guesses user has selected
+    //User can only guess contents of the array
+
+    // if (userGuess != alphaPick) {
     
+    // }
+
+    //show guesses user has selected
+
+    var pressedKeys = document.getElementById("pressedkeys");
+
+    pressedKeys.textContent = "Your Guesses So Far: " + event.key;
+
     //Add to wins/losses/guesses based on what user picked
 
     if (guesses === 9) {
         reset();
         losses++;
     } else if (userGuess === computerPick) {
-        
         wins++;
     } else {
-        
         guesses++;
     }
     updateScore();
