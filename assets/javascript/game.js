@@ -25,19 +25,22 @@ function updateScore() {
     document.getElementById('guesses').innerHTML = "Guesses Left: " + guesses;
 }
 
+//Reset score totals
+
 function reset() {
     computerPick = alphaPick[Math.floor(Math.random() * alphaPick.length)];
-    guesses = 0;
+    guesses = 9;
 }
 
 
 
 document.onkeypress = function (event) {
     var userGuess = event.key;
+
     //User can only guess contents of the array
 
     // if (userGuess != alphaPick) {
-    
+    // Then it doesn't count towards their guess total
     // }
 
     //show guesses user has selected
@@ -48,13 +51,14 @@ document.onkeypress = function (event) {
 
     //Add to wins/losses/guesses based on what user picked
 
-    if (guesses === 9) {
+    if (guesses === 0) {
         reset();
         losses++;
     } else if (userGuess === computerPick) {
         wins++;
+        reset();
     } else {
-        guesses++;
+        guesses--;
     }
     updateScore();
 }
