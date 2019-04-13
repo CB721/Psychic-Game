@@ -34,8 +34,6 @@ function reset() {
     keyFill = [];
 }
 
-
-
 document.onkeypress = function (event) {
     var userGuess = event.key;
 
@@ -43,17 +41,19 @@ document.onkeypress = function (event) {
 
     if (guesses === 0) {
         losses++;
+        updateScore();
         alert('Oh no!');
         reset();
     } else if (userGuess === computerPick) {
         wins++;
+        updateScore();
+        alert('You got a match!')
         reset();
     } else {
         guesses--;
-
-        // pressedKeys.prepend(event.key);
     }
     updateScore();
+
     var pressedKeys = document.getElementById("pressedkeys");
 
     //show guesses user has selected
